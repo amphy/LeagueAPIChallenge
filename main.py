@@ -3,11 +3,15 @@ import re
 import time
 import datetime
 
+from ConfigParser import SafeConfigParser
+
 class Query:
 	def __init__(self, server, beginDate, apiKey):
-		self.server = server
+    parser = SafeConfigParser()
+    parser.read('config.ini')
+    self.server = server
 		self.beginDate = beginDate
-		self.apiKey = apiKey
+		self.apiKey = parser.get('league_api', 'apikey')
 		self.url = self.generateUrl()
 	
 	def generateUrl(self):
