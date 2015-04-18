@@ -1,0 +1,46 @@
+<head>
+	<title>Buildr - Instant Random League Builds</title>
+	
+	<!-- CSS Files -->
+	<link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">	
+	<!--Main Content-->
+	<section id="content" class="container content-section text-center">
+        <div class ="content-area">
+			<div class="row">
+				<h1>Buildr</h1>
+				<h2>For when you don't know what you want.</h2>
+				<br>
+<form action="{{ url_for('champion') }}" method="get">
+<label for="search">Search for a Champion: </label>
+  <input id="search">
+</form>				
+			</div>
+		</div>
+    </section>
+</body>
+
+<!-- jQuery -->
+    <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+	
+	<!-- main -->
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+<script>
+  $(function() {
+    var availableTags = [];
+ {% for o in champ_list %}
+              var champName = String("{{ o }}")
+              availableTags.push(champName.replace("&#39;","'"));
+    {% endfor %}
+
+    $( "#search" ).autocomplete({
+      source: availableTags
+    });
+  });
+  </script>
