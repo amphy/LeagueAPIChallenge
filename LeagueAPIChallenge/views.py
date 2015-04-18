@@ -18,12 +18,6 @@ try:
 except:
   print "ERROR WITH DATABASE CALL"
 
-#app.config['MYSQL_DATABASE_USER'] = parser.get('database', 'username')
-#app.config['MYSQL_DATABASE_PASSWORD'] = parser.get('database', 'password')
-#app.config['MYSQL_DATABASE_DB'] = parser.get('database', 'name')
-#app.config['MYSQUL_DATABASE_HOST'] = parser.get('database', 'host')
-#mysql.init_app(app)
-
 cursor = mysql.connect().cursor()
 cursor.execute('SELECT match_id from urf')
 entries = cursor.fetchone()
@@ -33,7 +27,15 @@ print entries
 def mainpage():
   return render_template('template.html', name = 'Heather')
 
-@app.route('/LeagueAPIChallenge/template/')
+@app.route('/LeagueAPIChallenge/champion/')
 def hello():
-  return render_template('template.html', name = 'name')
+  img_prefix = 'http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/'
+  img1 = img_prefix + '3153.png'
+  img2 = img_prefix + '3181.png'
+  img3 = img_prefix + '3047.png'
+  img4 = img_prefix + '3142.png'
+  img5 = img_prefix + '3074.png'
+  img6 = img_prefix + '3184.png'
+  return render_template('champion.html', champion_name = 'Aatrox', url_img1 = img1, url_img2 = img2, 
+  url_img3 = img3, url_img4 = img4, url_img5 = img5, url_img6 = img6)
 
